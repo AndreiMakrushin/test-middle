@@ -97,17 +97,9 @@ const getFieldComponent = (type: string) => {
       border-radius: 4px;
       cursor: pointer;
 
-      &:not(.disabled):hover {
-        background-color: #ffebee; /* Легкий красный оттенок */
-        border-color: #ffcdd2;
-        color: #d32f2f; /* Темно-красный текст */
-      }
-
       &.disabled {
         opacity: 0.6;
         cursor: not-allowed;
-
-        /* Убираем hover-эффекты для disabled */
         &:hover {
           background-color: #f4f4f4;
           border-color: #ddd;
