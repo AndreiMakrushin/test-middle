@@ -112,7 +112,6 @@ const getFieldComponent = (type: string) => {
         opacity: 0.6;
         background-color: #363535;
         cursor: not-allowed;
-
         &:hover {
           background-color: #f4f4f4;
           border-color: #ddd;
