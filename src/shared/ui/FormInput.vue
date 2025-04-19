@@ -12,5 +12,6 @@ const model = defineModel<string | boolean | number>()
   <div class="form-input">
     <label v-if="label">{{ label }}</label>
     <input v-model="model" :type="type" :placeholder="placeholder" />
+    <slot name="append"></slot>
   </div>
 </template>

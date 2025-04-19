@@ -12,6 +12,7 @@ const formConfig: FormConfig = {
     label: 'Name',
     attributes: {
       placeholder: 'Enter your name',
+      slot: `<ol><li>Item 1</li><li>Item 2</li><li>кастомизация инпута</li></li></ol>`,
     },
   },
   cityList: {
@@ -22,7 +23,6 @@ const formConfig: FormConfig = {
     attributes: {
       placeholder: 'Select your city',
     },
-
     options: [
       {
         label: 'New York',

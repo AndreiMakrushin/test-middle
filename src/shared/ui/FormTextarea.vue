@@ -10,6 +10,7 @@ const model = defineModel<string>()
   <div class="form-input">
     <label>{{ label }}</label>
     <textarea v-model="model" :placeholder="placeholder" />
+    <slot name="append"></slot>
   </div>
 </template>
 

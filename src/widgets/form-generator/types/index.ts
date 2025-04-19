@@ -11,12 +11,9 @@ export interface BaseFormField {
     placeholder?: string
     rows?: number
     [key: string]: unknown
+    slot?: string
   }
   options?: FormFieldOption[]
-  slot?: {
-    name: string
-    props?: Record<string, unknown>
-  }
 }
 
 export interface InputFormField extends BaseFormField {

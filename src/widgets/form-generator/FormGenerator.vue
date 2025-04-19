@@ -8,7 +8,11 @@
         :type="field.type"
         :options="field.options"
         :placeholder="field.attributes?.placeholder"
-      />
+      >
+        <template #append v-if="field.attributes?.slot">
+          <div v-html="field.attributes.slot"></div
+        ></template>
+      </component>
     </div>
 
     <div class="form-actions">
@@ -21,7 +25,7 @@
       >
         Cancel
       </button>
-      <button type="submit" class="submit-button">Submit</button>
+      <button type="submit" :disabled="!isFormValid" class="submit-button">Submit</button>
     </div>
   </form>
 </template>
@@ -51,12 +55,18 @@ const resetForm = () => {
 const hasChanges = computed(
   () => JSON.stringify(formModel.value) !== JSON.stringify(initialFormData.value),
 )
+
+const isFormValid = computed(() => !Object.values(formModel.value).some((val) => val === ''))
+
 const handleSubmit = () => {
-  console.log(formModel.value)
+  console.log('Форма отправлена:', formModel.value)
 }
 
 const handleCancel = () => {
-  resetForm()
+  if (!hasChanges.value) return
+  if (confirm('Отменить изменения? Все несохраненные данные будут потеряны.')) {
+    resetForm()
+  }
 }
 
 const getFieldComponent = (type: string) => {
@@ -77,6 +87,7 @@ const getFieldComponent = (type: string) => {
 
 <style lang="scss">
 .form-generator {
+  max-width: 80vw;
   .form-field {
     margin-bottom: 1rem;
 
@@ -97,17 +108,11 @@ const getFieldComponent = (type: string) => {
       border-radius: 4px;
       cursor: pointer;
 
-      &:not(.disabled):hover {
-        background-color: #ffebee; /* Легкий красный оттенок */
-        border-color: #ffcdd2;
-        color: #d32f2f; /* Темно-красный текст */
-      }
-
       &.disabled {
         opacity: 0.6;
+        background-color: #363535;
         cursor: not-allowed;
 
-        /* Убираем hover-эффекты для disabled */
         &:hover {
           background-color: #f4f4f4;
           border-color: #ddd;
@@ -119,16 +124,21 @@ const getFieldComponent = (type: string) => {
         background-color: #42b983;
         color: white;
         border: none;
+
+        &:disabled {
+          background-color: #cccccc !important;
+          cursor: not-allowed;
+        }
       }
 
       &.cancel-button {
         background-color: #f4f4f4;
         border: 1px solid #ddd;
-      }
 
-      &.cancel-button:hover {
-        background-color: red;
-        color: white;
+        &:hover {
+          background-color: red;
+          color: white;
+        }
       }
     }
   }
